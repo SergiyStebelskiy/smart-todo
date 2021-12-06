@@ -1,24 +1,51 @@
 <form
-  #signupform="ngForm"
   class="auth-form"
   novalidate
   autocomplete="off"
-  (ngSubmit)="onCreateAccount(signupform)"
+  [formGroup]="registrateValues"
+  (ngSubmit)="onCreateAccount()"
 >
   <h1 class="title">Registration</h1>
   <div class="col">
     <mat-form-field appearance="fill" class="form-field">
       <mat-label>First name</mat-label>
-      <input matInput type="text" name="first_name" id="first_name" ngModel />
+      <input
+        matInput
+        type="text"
+        name="first_name"
+        formControlName="first_name"
+      />
+      <mat-error
+        *ngIf="registrateValues.controls['first_name'].errors?.['required']"
+        >First name is required</mat-error
+      >
+      <mat-error
+        *ngIf="registrateValues.controls['first_name'].errors?.['minlength']"
+        >First name should have 3 symbols or more</mat-error
+      >
     </mat-form-field>
     <mat-form-field appearance="fill" class="form-field">
       <mat-label>Last name</mat-label>
-      <input matInput name="last_name" id="last_name" ngModel />
+      <input matInput name="last_name" formControlName="last_name" />
+      <mat-error
+        *ngIf="registrateValues.controls['last_name'].errors?.['required']"
+        >First name is required</mat-error
+      >
+      <mat-error
+        *ngIf="registrateValues.controls['last_name'].errors?.['minlength']"
+        >Last name should have 3 symbols or more</mat-error
+      >
     </mat-form-field>
   </div>
   <mat-form-field appearance="fill" class="form-field">
     <mat-label>Email</mat-label>
-    <input matInput type="text" name="email" id="email" ngModel />
+    <input matInput type="text" name="email" formControlName="email" />
+    <mat-error *ngIf="registrateValues.controls['email'].errors?.['required']"
+      >Email is required</mat-error
+    >
+    <mat-error *ngIf="registrateValues.controls['email'].errors?.['email']"
+      >Email should be valid</mat-error
+    >
   </mat-form-field>
   <mat-form-field appearance="fill" class="form-field">
     <mat-label>Password</mat-label>
@@ -26,9 +53,16 @@
       matInput
       [type]="passHide ? 'password' : 'text'"
       name="password"
-      id="password"
-      ngModel
+      formControlName="password"
     />
+    <mat-error
+      *ngIf="registrateValues.controls['password'].errors?.['required']"
+      >Password is required</mat-error
+    >
+    <mat-error
+      *ngIf="registrateValues.controls['password'].errors?.['minlength']"
+      >Password should have 6 symbols or more</mat-error
+    >
     <button
       mat-icon-button
       matSuffix
@@ -40,7 +74,13 @@
       <mat-icon>{{ passHide ? "visibility_off" : "visibility" }}</mat-icon>
     </button>
   </mat-form-field>
-  <button mat-raised-button color="primary" type="submit" class="send-btn">
+  <button
+    mat-raised-button
+    color="primary"
+    type="submit"
+    class="send-btn"
+    [disabled]="!registrateValues.valid"
+  >
     Create account
   </button>
 </form>

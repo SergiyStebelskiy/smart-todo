@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'registration-form',
@@ -8,11 +8,28 @@ import { NgForm } from '@angular/forms';
 })
 export class FormComponent implements OnInit {
   passHide: boolean = true;
+  registrateValues: FormGroup = new FormGroup({
+    first_name: new FormControl('', [
+      Validators.required,
+      Validators.minLength(3),
+    ]),
+    last_name: new FormControl('', [
+      Validators.required,
+      Validators.minLength(3),
+    ]),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [
+      Validators.required,
+      Validators.minLength(6),
+    ]),
+  });
 
   constructor() {}
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.registrateValues);
+  }
 
-  onCreateAccount(form: NgForm) {
-    console.log(form.value);
+  onCreateAccount() {
+    console.log(this.registrateValues.value);
   }
 }
