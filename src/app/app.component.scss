@@ -1,0 +1,21 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html,
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+  background: #fafafa;
+}
+
+.auth-form {
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 4px;
+  background: white;
+  padding: 32px 24px;
+  width: 460px;
+}
