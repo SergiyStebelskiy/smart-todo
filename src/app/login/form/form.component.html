@@ -1,0 +1,53 @@
+<form
+  class="auth-form"
+  novalidate
+  autocomplete="off"
+  [formGroup]="loginValues"
+  (ngSubmit)="onLogin()"
+>
+  <h1 class="title">Log into your account</h1>
+  <mat-form-field appearance="fill" class="form-field">
+    <mat-label>Email</mat-label>
+    <input matInput type="text" name="email" formControlName="email" />
+    <mat-error *ngIf="loginValues.controls['email'].errors?.['required']"
+      >Email is required</mat-error
+    >
+    <mat-error *ngIf="loginValues.controls['email'].errors?.['email']"
+      >Email should be valid</mat-error
+    >
+  </mat-form-field>
+  <mat-form-field appearance="fill" class="form-field">
+    <mat-label>Password</mat-label>
+    <input
+      matInput
+      [type]="passHide ? 'password' : 'text'"
+      name="password"
+      formControlName="password"
+    />
+    <mat-error *ngIf="loginValues.controls['password'].errors?.['required']"
+      >Password is required</mat-error
+    >
+    <mat-error *ngIf="loginValues.controls['password'].errors?.['minlength']"
+      >Password should have 6 symbols or more</mat-error
+    >
+    <button
+      mat-icon-button
+      matSuffix
+      (click)="passHide = !passHide"
+      [attr.aria-label]="'Hide password'"
+      [attr.aria-pressed]="passHide"
+      type="button"
+    >
+      <mat-icon>{{ passHide ? "visibility_off" : "visibility" }}</mat-icon>
+    </button>
+  </mat-form-field>
+  <button
+    mat-raised-button
+    color="primary"
+    type="submit"
+    class="send-btn"
+    [disabled]="!loginValues.valid"
+  >
+    Log in
+  </button>
+</form>

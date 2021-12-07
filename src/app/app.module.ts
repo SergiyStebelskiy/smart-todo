@@ -3,7 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RegistrationComponent } from './registration/registration.component';
-import { FormComponent } from './registration/form/form.component';
+import { LoginComponent } from './login/login.component';
+import { RegistrationFormComponent } from './registration/form/form.component';
+import { LoginFormComponent } from './login/form/form.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -12,7 +14,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [AppComponent, RegistrationComponent, FormComponent],
+  declarations: [
+    AppComponent,
+    RegistrationComponent,
+    RegistrationFormComponent,
+    LoginFormComponent,
+    LoginComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

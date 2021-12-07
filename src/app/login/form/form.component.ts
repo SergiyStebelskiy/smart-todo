@@ -2,21 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'registration-form',
+  selector: 'login-form',
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.scss'],
 })
-export class RegistrationFormComponent implements OnInit {
+export class LoginFormComponent implements OnInit {
   passHide: boolean = true;
-  registrateValues: FormGroup = new FormGroup({
-    first_name: new FormControl('', [
-      Validators.required,
-      Validators.minLength(3),
-    ]),
-    last_name: new FormControl('', [
-      Validators.required,
-      Validators.minLength(3),
-    ]),
+  loginValues: FormGroup = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [
       Validators.required,
@@ -26,10 +18,10 @@ export class RegistrationFormComponent implements OnInit {
 
   constructor() {}
   ngOnInit(): void {
-    console.log(this.registrateValues);
+    console.log(this.loginValues);
   }
 
-  onCreateAccount() {
-    console.log(this.registrateValues.value);
+  onLogin() {
+    console.log(this.loginValues.value);
   }
 }
