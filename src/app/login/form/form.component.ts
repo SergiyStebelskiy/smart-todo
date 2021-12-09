@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -6,7 +6,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.scss'],
 })
-export class LoginFormComponent implements OnInit {
+export class LoginFormComponent {
   passHide: boolean = true;
   loginValues: FormGroup = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -17,11 +17,6 @@ export class LoginFormComponent implements OnInit {
   });
 
   constructor() {}
-  ngOnInit(): void {
-    console.log(this.loginValues);
-  }
 
-  onLogin() {
-    console.log(this.loginValues.value);
-  }
+  onLogin() {}
 }
