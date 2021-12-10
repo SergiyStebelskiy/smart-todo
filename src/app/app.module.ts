@@ -14,6 +14,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     RegistrationFormComponent,
     LoginFormComponent,
     LoginComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,

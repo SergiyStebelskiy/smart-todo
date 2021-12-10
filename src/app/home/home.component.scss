@@ -1,0 +1,60 @@
+.home-page {
+  padding: 40px;
+  .tasks-list,
+  .message {
+    margin-top: 40px;
+  }
+  .tasks-list {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .task {
+    width: 24%;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 4px;
+    background: white;
+    padding: 24px;
+    padding-bottom: 46px;
+    position: relative;
+    &:not(:first-child, :nth-child(2), :nth-child(3), :nth-child(4)) {
+      margin-top: 1.5%;
+    }
+    &:not(:nth-child(4n)) {
+      margin-right: calc(4% / 3);
+    }
+    .name,
+    .description {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .name {
+      -webkit-line-clamp: 2;
+    }
+    .description {
+      -webkit-line-clamp: 4;
+    }
+    .priority {
+      position: absolute;
+      bottom: 12px;
+      right: 12px;
+      display: block;
+      padding: 4px 12px;
+      color: white;
+      border-radius: 4px;
+      &.low {
+        background-color: #357a38;
+      }
+      &.normal {
+        background-color: #ff9800;
+      }
+      &.hight {
+        background-color: #ff1744;
+      }
+    }
+  }
+  .message {
+    display: block;
+  }
+}

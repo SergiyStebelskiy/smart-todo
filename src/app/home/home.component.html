@@ -1,0 +1,20 @@
+<main class="home-page">
+  <button mat-raised-button color="primary">Create task</button>
+  <ul class="tasks-list" *ngIf="!loading && tasks.length > 0">
+    <li class="task" *ngFor="let task of tasks">
+      <h2 class="name">{{ task.name }}</h2>
+      <p class="description">{{ task.description }}</p>
+      <span
+        [ngClass]="{
+          priority: true,
+          low: task.priority === 'low',
+          normal: task.priority === 'normal',
+          hight: task.priority === 'hight'
+        }"
+        >{{ task.priority }}</span
+      >
+    </li>
+  </ul>
+  <span class="message" *ngIf="loading">Loading...</span>
+  <span class="message" *ngIf="!loading && !tasks.length">Tasks not found</span>
+</main>
