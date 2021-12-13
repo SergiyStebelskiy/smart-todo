@@ -13,3 +13,9 @@ ol,
 ul {
   list-style: none;
 }
+#cke_editor1 span#cke_1_toolbox[role="group"] > span:last-child {
+  display: none;
+}
+.cke_inner[role="presentation"].error {
+  border-bottom: 2px solid #f44336;
+}

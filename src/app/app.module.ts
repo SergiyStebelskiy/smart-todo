@@ -17,6 +17,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { HomeComponent } from './home/home.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { PopupComponent } from './home/popup/popup.component';
+import { CKEditorModule } from 'ckeditor4-angular';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { PopupComponent } from './home/popup/popup.component';
     HttpClientModule,
     MatSnackBarModule,
     MatDialogModule,
+    CKEditorModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

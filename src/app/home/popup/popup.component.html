@@ -1,5 +1,5 @@
 <form
-  class="task-from"
+  class="task-form"
   novalidate
   autocomplete="off"
   [formGroup]="taskValues"
@@ -20,6 +20,35 @@
         >Name is too long</mat-error
       >
     </mat-form-field>
+    <div class="form-field editor-wrap">
+      <ckeditor
+        [data]="description"
+        class="editor"
+        (change)="onDescriptionChange($event)"
+      ></ckeditor>
+      <span
+        class="mat-error error-message"
+        *ngIf="!description.length && taskValues.touched && changedDescription"
+        >Description is required</span
+      >
+      <span
+        class="mat-error error-message"
+        *ngIf="
+          description.length < 20 &&
+          description.length > 0 &&
+          taskValues.touched &&
+          changedDescription
+        "
+        >Description is too short</span
+      >
+      <span
+        class="mat-error error-message"
+        *ngIf="
+          description.length > 5000 && taskValues.touched && changedDescription
+        "
+        >Description is too long</span
+      >
+    </div>
   </div>
   <div mat-dialog-actions>
     <button mat-button (click)="onNoClick()">Cancel</button>
@@ -28,6 +57,11 @@
       [mat-dialog-close]="data.name"
       cdkFocusInitial
       type="submit"
+      [disabled]="
+        !taskValues.valid ||
+        description.length < 20 ||
+        description.length > 5000
+      "
     >
       Add
     </button>
