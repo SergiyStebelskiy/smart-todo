@@ -7,4 +7,21 @@
     padding: 0 1em;
     margin-top: 0.6666666667em;
   }
+  .priorities {
+    margin-top: 16px;
+  }
+}
+.priority {
+  padding: 4px 12px;
+  color: white;
+  border-radius: 4px;
+  &.low {
+    background-color: #357a38;
+  }
+  &.normal {
+    background-color: #ff9800;
+  }
+  &.hight {
+    background-color: #ff1744;
+  }
 }

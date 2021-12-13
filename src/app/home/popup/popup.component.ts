@@ -4,6 +4,11 @@ import { ITask } from '../interfaces';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import * as angular from 'angular';
 
+interface Priority {
+  value: string;
+  viewValue: string;
+}
+
 @Component({
   selector: 'app-popup',
   templateUrl: './popup.component.html',
@@ -17,9 +22,15 @@ export class PopupComponent {
       Validators.minLength(4),
       Validators.maxLength(150),
     ]),
+    priority: new FormControl('low'),
   });
   public description: string = '';
   public changedDescription: boolean = false;
+  priorities: Priority[] = [
+    { value: 'low', viewValue: 'Low' },
+    { value: 'normal', viewValue: 'Normal' },
+    { value: 'hight', viewValue: 'Hight' },
+  ];
   constructor(
     public dialogRef: MatDialogRef<PopupComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { name: string }
@@ -35,7 +46,6 @@ export class PopupComponent {
     this.changedDescription = true;
     const value = e.editor.getData();
     this.description = value;
-    console.log(value);
     if ((value.length < 20 || value.length > 5000) && this.taskValues.touched) {
       angular
         .element(

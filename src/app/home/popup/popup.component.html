@@ -49,6 +49,29 @@
         >Description is too long</span
       >
     </div>
+    <mat-form-field appearance="fill" class="priorities">
+      <mat-label>Priority</mat-label>
+      <mat-select
+        matSelect
+        formControlName="priority"
+        [(value)]="taskValues.value.priority"
+      >
+        <mat-option
+          *ngFor="let priority of priorities"
+          [value]="priority.value"
+        >
+          <span
+            [ngClass]="{
+              priority: true,
+              low: priority.value === 'low',
+              normal: priority.value === 'normal',
+              hight: priority.value === 'hight'
+            }"
+            >{{ priority.viewValue }}</span
+          >
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
   </div>
   <div mat-dialog-actions>
     <button mat-button (click)="onNoClick()">Cancel</button>
