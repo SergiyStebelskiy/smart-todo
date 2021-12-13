@@ -53,20 +53,23 @@ export class HomeComponent implements OnInit {
         });
   }
 
-  openCreateTaskPopup(): void {
-    const dialogRef = this.dialog.open(PopupComponent, {
-      width: '60%',
-    });
-    dialogRef.componentInstance['submitEvent'].subscribe(this.onCreateTask);
-  }
   onCreateTask(values: ITask) {
-    console.log(values);
     const config = new MatSnackBarConfig();
     config.duration = 3000;
     config.horizontalPosition = 'left';
     config.verticalPosition = 'bottom';
+    const token = localStorage.getItem('access_token');
+    if (!token) this.router.navigateByUrl('login');
     return this.http
-      .post<ITask>(`${environment.url}/tasks`, values)
+      .post<ITask>(
+        `${environment.url}/tasks`,
+        { ...values, checked: false },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
       .pipe(
         catchError((error) => {
           let message = 'Something went wrong';
@@ -79,10 +82,15 @@ export class HomeComponent implements OnInit {
         this.tasks.push(data);
         this._snackBar
           .open('Task successfully created.', '', config)
-          .afterDismissed()
-          .subscribe(() => {
-            this.router.navigateByUrl('/');
-          });
+          .afterDismissed();
       });
+  }
+  openCreateTaskPopup(): void {
+    const dialogRef = this.dialog.open(PopupComponent, {
+      width: '60%',
+    });
+    dialogRef.componentInstance['submitEvent'].subscribe(
+      this.onCreateTask.bind(this)
+    );
   }
 }
