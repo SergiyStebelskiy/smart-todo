@@ -1,5 +1,7 @@
 <main class="home-page">
-  <button mat-raised-button color="primary">Create task</button>
+  <button mat-raised-button color="primary" (click)="openCreateTaskPopup()">
+    Create task
+  </button>
   <ul class="tasks-list" *ngIf="!loading && tasks.length > 0">
     <li class="task" *ngFor="let task of tasks">
       <h2 class="name">{{ task.name }}</h2>

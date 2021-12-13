@@ -1,3 +1,4 @@
+import { PopupComponent } from './popup/popup.component';
 import { ITask } from './interfaces';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
@@ -5,6 +6,11 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { catchError, throwError } from 'rxjs';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
+import {
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-home',
@@ -15,7 +21,8 @@ export class HomeComponent implements OnInit {
   constructor(
     private router: Router,
     private http: HttpClient,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    public dialog: MatDialog
   ) {}
   tasks: Array<ITask> = [];
   loading: boolean = true;
@@ -48,5 +55,12 @@ export class HomeComponent implements OnInit {
           this.loading = false;
           this.tasks = data as Array<ITask>;
         });
+  }
+
+  openCreateTaskPopup(): void {
+    const dialogRef = this.dialog.open(PopupComponent, {
+      width: '60%',
+      data: { name: 'test' },
+    });
   }
 }

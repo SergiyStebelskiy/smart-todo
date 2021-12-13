@@ -15,6 +15,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { HomeComponent } from './home/home.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { PopupComponent } from './home/popup/popup.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,7 @@ import { HomeComponent } from './home/home.component';
     LoginFormComponent,
     LoginComponent,
     HomeComponent,
+    PopupComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,6 +39,7 @@ import { HomeComponent } from './home/home.component';
     ReactiveFormsModule,
     HttpClientModule,
     MatSnackBarModule,
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
