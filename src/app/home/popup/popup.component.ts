@@ -15,7 +15,7 @@ interface Priority {
   styleUrls: ['./popup.component.scss'],
 })
 export class PopupComponent {
-  @Output() loginEvent = new EventEmitter<ITask>();
+  @Output() submitEvent = new EventEmitter<ITask>();
   taskValues: FormGroup = new FormGroup({
     name: new FormControl('', [
       Validators.required,
@@ -39,7 +39,10 @@ export class PopupComponent {
     this.dialogRef.close();
   }
   onSubmit() {
-    console.log({ ...this.taskValues.value, description: this.description });
+    this.submitEvent.emit({
+      ...this.taskValues.value,
+      description: this.description,
+    });
   }
 
   onDescriptionChange(e: any): void {

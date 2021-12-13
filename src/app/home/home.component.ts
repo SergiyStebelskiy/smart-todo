@@ -6,11 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { catchError, throwError } from 'rxjs';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
-import {
-  MatDialog,
-  MatDialogRef,
-  MAT_DIALOG_DATA,
-} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-home',
@@ -60,7 +56,33 @@ export class HomeComponent implements OnInit {
   openCreateTaskPopup(): void {
     const dialogRef = this.dialog.open(PopupComponent, {
       width: '60%',
-      data: { name: 'test' },
     });
+    dialogRef.componentInstance['submitEvent'].subscribe(this.onCreateTask);
+  }
+  onCreateTask(values: ITask) {
+    console.log(values);
+    const config = new MatSnackBarConfig();
+    config.duration = 3000;
+    config.horizontalPosition = 'left';
+    config.verticalPosition = 'bottom';
+    return this.http
+      .post<ITask>(`${environment.url}/tasks`, values)
+      .pipe(
+        catchError((error) => {
+          let message = 'Something went wrong';
+          if (error?.status === 400) message = 'Validation error';
+          this._snackBar.open(message, '', config);
+          return throwError('');
+        })
+      )
+      .subscribe((data) => {
+        this.tasks.push(data);
+        this._snackBar
+          .open('Task successfully created.', '', config)
+          .afterDismissed()
+          .subscribe(() => {
+            this.router.navigateByUrl('/');
+          });
+      });
   }
 }
