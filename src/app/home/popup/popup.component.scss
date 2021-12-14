@@ -1,4 +1,13 @@
 .task-form {
+  .header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+    .title {
+      margin-bottom: 0;
+      margin-left: 12px;
+    }
+  }
   .form-field {
     width: 100%;
   }

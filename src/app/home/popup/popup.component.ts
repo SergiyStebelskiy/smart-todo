@@ -1,6 +1,6 @@
+import { ITask } from './../interfaces';
 import { Component, Inject, EventEmitter, Output } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ITask } from '../interfaces';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import * as angular from 'angular';
 
@@ -17,15 +17,17 @@ interface Priority {
 export class PopupComponent {
   @Output() submitEvent = new EventEmitter<ITask>();
   taskValues: FormGroup = new FormGroup({
-    name: new FormControl('', [
+    name: new FormControl(this.data.task?.name || '', [
       Validators.required,
       Validators.minLength(4),
       Validators.maxLength(150),
     ]),
-    priority: new FormControl('low'),
+    priority: new FormControl(this.data.task?.priority || 'low'),
+    checked: new FormControl(this.data.task?.checked || false),
   });
-  public description: string = '';
+  public description: string = this.data.task?.description || '';
   public changedDescription: boolean = false;
+  public checked = false;
   priorities: Priority[] = [
     { value: 'low', viewValue: 'Low' },
     { value: 'normal', viewValue: 'Normal' },
@@ -33,7 +35,8 @@ export class PopupComponent {
   ];
   constructor(
     public dialogRef: MatDialogRef<PopupComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { name: string }
+    @Inject(MAT_DIALOG_DATA)
+    public data: { type: 'create' | 'edit'; task: ITask | null }
   ) {}
   onNoClick(): void {
     this.dialogRef.close();
@@ -42,6 +45,7 @@ export class PopupComponent {
     this.submitEvent.emit({
       ...this.taskValues.value,
       description: this.description,
+      id: this.data.task?.id || null,
     });
   }
 

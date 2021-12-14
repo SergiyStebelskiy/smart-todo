@@ -53,7 +53,7 @@ export class HomeComponent implements OnInit {
         });
   }
 
-  onCreateTask(values: ITask) {
+  onCreateTask({ id, ...values }: ITask) {
     const config = new MatSnackBarConfig();
     config.duration = 3000;
     config.horizontalPosition = 'left';
@@ -80,17 +80,57 @@ export class HomeComponent implements OnInit {
       )
       .subscribe((data) => {
         this.tasks.push(data);
-        this._snackBar
-          .open('Task successfully created.', '', config)
-          .afterDismissed();
+        this._snackBar.open('Task successfully created.', '', config);
+      });
+  }
+  onEditTask({ id, ...values }: ITask) {
+    const config = new MatSnackBarConfig();
+    config.duration = 3000;
+    config.horizontalPosition = 'left';
+    config.verticalPosition = 'bottom';
+    const token = localStorage.getItem('access_token');
+    if (!token) this.router.navigateByUrl('login');
+    return this.http
+      .put<ITask>(`${environment.url}/tasks/${id}`, values, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .pipe(
+        catchError((error) => {
+          let message = 'Something went wrong';
+          if (error?.status === 400) message = 'Validation error';
+          this._snackBar.open(message, '', config);
+          return throwError('');
+        })
+      )
+      .subscribe((data) => {
+        this.tasks = this.tasks.map((e) => (e.id === data.id ? data : e));
+        this._snackBar.open('Task successfully changed.', '', config);
       });
   }
   openCreateTaskPopup(): void {
     const dialogRef = this.dialog.open(PopupComponent, {
       width: '60%',
+      data: {
+        type: 'create',
+        task: null,
+      },
     });
     dialogRef.componentInstance['submitEvent'].subscribe(
       this.onCreateTask.bind(this)
+    );
+  }
+  openEditTaskPopup(task: ITask) {
+    const dialogRef = this.dialog.open(PopupComponent, {
+      width: '60%',
+      data: {
+        type: 'edit',
+        task,
+      },
+    });
+    dialogRef.componentInstance['submitEvent'].subscribe(
+      this.onEditTask.bind(this)
     );
   }
 }

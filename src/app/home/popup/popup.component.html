@@ -5,7 +5,18 @@
   [formGroup]="taskValues"
   (ngSubmit)="onSubmit()"
 >
-  <h1 mat-dialog-title>Add new task</h1>
+  <div class="header">
+    <mat-checkbox
+      class="example-margin"
+      name="checked"
+      formControlName="checked"
+      *ngIf="data.type === 'edit'"
+    ></mat-checkbox>
+    <h1 mat-dialog-title class="title">
+      {{ data.type === "create" ? "Add new task" : "Edit task" }}
+    </h1>
+  </div>
+
   <div mat-dialog-content>
     <mat-form-field appearance="fill" class="form-field">
       <mat-label>Name</mat-label>
@@ -86,7 +97,7 @@
         description.length > 5000
       "
     >
-      Add
+      {{ data.type === "create" ? "Add" : "Edit" }}
     </button>
   </div>
 </form>

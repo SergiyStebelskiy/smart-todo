@@ -11,7 +11,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { HomeComponent } from './home/home.component';
@@ -19,6 +19,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { PopupComponent } from './home/popup/popup.component';
 import { CKEditorModule } from 'ckeditor4-angular';
 import { MatSelectModule } from '@angular/material/select';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -39,11 +41,14 @@ import { MatSelectModule } from '@angular/material/select';
     MatIconModule,
     MatButtonModule,
     ReactiveFormsModule,
+    FormsModule,
     HttpClientModule,
     MatSnackBarModule,
     MatDialogModule,
     CKEditorModule,
     MatSelectModule,
+    MatMenuModule,
+    MatCheckboxModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

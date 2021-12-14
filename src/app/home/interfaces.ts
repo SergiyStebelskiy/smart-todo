@@ -3,4 +3,5 @@ export interface ITask {
   name: string;
   description: string;
   priority: string;
+  checked?: boolean;
 }
