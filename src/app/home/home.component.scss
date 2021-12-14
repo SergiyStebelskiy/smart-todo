@@ -34,6 +34,10 @@
     }
     .description {
       -webkit-line-clamp: 4;
+      ol,
+      ul {
+        list-style: initial;
+      }
     }
     .priority {
       position: absolute;
@@ -57,6 +61,11 @@
       position: absolute;
       top: 12px;
       right: 12px;
+    }
+    .checked {
+      position: absolute;
+      bottom: 12px;
+      left: 12px;
     }
   }
   .message {

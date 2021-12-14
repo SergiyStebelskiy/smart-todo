@@ -36,7 +36,7 @@ export class PopupComponent {
   constructor(
     public dialogRef: MatDialogRef<PopupComponent>,
     @Inject(MAT_DIALOG_DATA)
-    public data: { type: 'create' | 'edit'; task: ITask | null }
+    public data: { type: 'create' | 'edit' | 'delete'; task: ITask | null }
   ) {}
   onNoClick(): void {
     this.dialogRef.close();

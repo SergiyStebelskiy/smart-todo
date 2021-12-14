@@ -13,11 +13,17 @@
       *ngIf="data.type === 'edit'"
     ></mat-checkbox>
     <h1 mat-dialog-title class="title">
-      {{ data.type === "create" ? "Add new task" : "Edit task" }}
+      {{
+        data.type === "create"
+          ? "Add new task"
+          : data.type === "edit"
+          ? "Edit task"
+          : 'Delete "' + data.task?.name + '" task'
+      }}
     </h1>
   </div>
 
-  <div mat-dialog-content>
+  <div mat-dialog-content *ngIf="data.type !== 'delete'">
     <mat-form-field appearance="fill" class="form-field">
       <mat-label>Name</mat-label>
       <input matInput type="text" name="name" formControlName="name" />
@@ -84,6 +90,9 @@
       </mat-select>
     </mat-form-field>
   </div>
+  <div mat-dialog-content *ngIf="data.type === 'delete'">
+    <span class="message">Are you sure to delete this task?</span>
+  </div>
   <div mat-dialog-actions>
     <button mat-button (click)="onNoClick()" type="button">Cancel</button>
     <button
@@ -97,7 +106,13 @@
         description.length > 5000
       "
     >
-      {{ data.type === "create" ? "Add" : "Edit" }}
+      {{
+        data.type === "create"
+          ? "Add"
+          : data.type === "edit"
+          ? "Edit"
+          : "Delete"
+      }}
     </button>
   </div>
 </form>

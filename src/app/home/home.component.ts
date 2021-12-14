@@ -109,6 +109,32 @@ export class HomeComponent implements OnInit {
         this._snackBar.open('Task successfully changed.', '', config);
       });
   }
+  onDeleteTask({ id }: { id: number }) {
+    const config = new MatSnackBarConfig();
+    config.duration = 3000;
+    config.horizontalPosition = 'left';
+    config.verticalPosition = 'bottom';
+    const token = localStorage.getItem('access_token');
+    if (!token) this.router.navigateByUrl('login');
+    return this.http
+      .delete<ITask>(`${environment.url}/tasks/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .pipe(
+        catchError((error) => {
+          let message = 'Something went wrong';
+          if (error?.status === 400) message = 'Validation error';
+          this._snackBar.open(message, '', config);
+          return throwError('');
+        })
+      )
+      .subscribe((data) => {
+        this.tasks = this.tasks.filter((e) => e.id !== id);
+        this._snackBar.open('Task successfully deleted.', '', config);
+      });
+  }
   openCreateTaskPopup(): void {
     const dialogRef = this.dialog.open(PopupComponent, {
       width: '60%',
@@ -131,6 +157,18 @@ export class HomeComponent implements OnInit {
     });
     dialogRef.componentInstance['submitEvent'].subscribe(
       this.onEditTask.bind(this)
+    );
+  }
+  openDeleteTaskPopup(task: ITask) {
+    const dialogRef = this.dialog.open(PopupComponent, {
+      width: '60%',
+      data: {
+        type: 'delete',
+        task,
+      },
+    });
+    dialogRef.componentInstance['submitEvent'].subscribe(
+      this.onDeleteTask.bind(this)
     );
   }
 }
