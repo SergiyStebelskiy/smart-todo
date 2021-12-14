@@ -1,7 +1,7 @@
 import { PopupComponent } from './popup/popup.component';
 import { ITask } from './interfaces';
 import { Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { catchError, throwError } from 'rxjs';
@@ -12,6 +12,7 @@ import { MatDialog } from '@angular/material/dialog';
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class HomeComponent implements OnInit {
   constructor(

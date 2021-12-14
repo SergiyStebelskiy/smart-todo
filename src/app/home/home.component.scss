@@ -36,7 +36,13 @@
       -webkit-line-clamp: 4;
       ol,
       ul {
-        list-style: initial;
+        list-style-position: inside;
+      }
+      ol {
+        list-style-type: decimal;
+      }
+      ul {
+        list-style-type: disc;
       }
     }
     .priority {
