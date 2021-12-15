@@ -3,7 +3,13 @@
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.0.4.
 
 # Demo
+
 https://smart-todo-beige.vercel.app/
+
+![screen](./screenshot-1.png)
+![screen](./screenshot-2.png)
+![screen](./screenshot-3.png)
+![screen](./screenshot-4.png)
 
 ## Development server
 
