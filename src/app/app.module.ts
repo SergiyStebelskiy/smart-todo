@@ -21,6 +21,7 @@ import { CKEditorModule } from 'ckeditor4-angular';
 import { MatSelectModule } from '@angular/material/select';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { ViewPopupComponent } from './home/view-popup/view-popup.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     LoginComponent,
     HomeComponent,
     PopupComponent,
+    ViewPopupComponent,
   ],
   imports: [
     BrowserModule,

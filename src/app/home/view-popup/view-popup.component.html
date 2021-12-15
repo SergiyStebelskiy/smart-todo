@@ -1,0 +1,11 @@
+<div class="task-view">
+  <h1 class="name" mat-dialog-title>
+    {{ data.task?.name }}
+  </h1>
+  <div mat-dialog-content>
+    <div class="description" [innerHTML]="data.task?.description"></div>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()" type="button">Cancel</button>
+  </div>
+</div>

@@ -4,7 +4,7 @@
   </button>
   <ul class="tasks-list" *ngIf="!loading && tasks.length > 0">
     <li class="task" *ngFor="let task of tasks">
-      <h2 class="name">{{ task.name }}</h2>
+      <h2 class="name" (click)="openViewTaskPopup(task)">{{ task.name }}</h2>
       <div class="description" [innerHTML]="task.description"></div>
       <span
         [ngClass]="{

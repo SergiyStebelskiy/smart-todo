@@ -1,3 +1,4 @@
+import { ViewPopupComponent } from './view-popup/view-popup.component';
 import { PopupComponent } from './popup/popup.component';
 import { ITask } from './interfaces';
 import { Router } from '@angular/router';
@@ -171,5 +172,13 @@ export class HomeComponent implements OnInit {
     dialogRef.componentInstance['submitEvent'].subscribe(
       this.onDeleteTask.bind(this)
     );
+  }
+  openViewTaskPopup(task: ITask) {
+    this.dialog.open(ViewPopupComponent, {
+      width: '80%',
+      data: {
+        task,
+      },
+    });
   }
 }
